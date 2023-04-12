@@ -1,0 +1,55 @@
+{% extends 'partials/base.html' %}
+
+{% block content %}
+    <div class="container botoes" style="margin-top: 100px; width: fit-content; gap: 100px; display: flex;">
+        <h1>Calculadora</h1>
+    </div>
+
+    <section class="container hero" style="margin-top: 20px; background-color: white; padding:24px;">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputvalor1">Consumo mês 1</label>
+                    <input type="text" class="form-control" id="inputvalor1" name="inputvalor1" placeholder="">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputvalor2">Consumo mês 2</label>
+                    <input type="text" class="form-control" id="inputvalor2" name="inputvalor2" placeholder="">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputvalor3">Consumo mês 3</label>
+                    <input type="text" class="form-control" id="inputvalor3" name="inputvalor3" placeholder="">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputtaxa">Valor da tarifa da distribuidora</label>
+                    <input type="text" class="form-control" name="taxa" id="inputtaxa">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputtipo">Tipo de tarifa </label>
+                    <select id="inputtipo" class="form-control" name="tipo">
+                        <option selected>Comercial</option>
+                        <option selected>Residencial</option>
+                        <option selected>Industrial</option>
+                    </select>
+                </div>   
+            </div>
+
+            <div style="display: flex; justify-content: center;">
+                <button type="submit" class="btn btn-primary" style="width:120px;">Calcular</button>
+            </div>   
+        </form>
+
+        {% if result %}
+            <div class="container" style="margin-top: 50px; width: fit-content; gap: 100px; display: flex;">
+                <h1>Resultado:</h1>
+                <p>Economia Anual: {{ result.0 }}</p>
+                <p>Economia Mensal: {{ result.1 }}</p>
+                <p>Desconto Aplicado: {{ result.2 }}</p>
+                <p>Cobertura: {{ result.3 }}</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
