@@ -1,4 +1,1 @@
 django
-djangorestframework
-drf-yasg
-django-environ
